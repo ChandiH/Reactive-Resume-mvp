@@ -4,7 +4,6 @@ import { BuilderLayout } from "../pages/builder/layout";
 import { builderLoader, BuilderPage } from "../pages/builder/page";
 import { DashboardLayout } from "../pages/dashboard/layout";
 import { ResumesPage } from "../pages/dashboard/resumes/page";
-import { publicLoader, PublicResumePage } from "../pages/public/page";
 import { Providers } from "../providers";
 import { GuestGuard } from "./guards/guest";
 
@@ -26,11 +25,6 @@ export const routes = createRoutesFromElements(
 
           <Route index element={<Navigate replace to="/dashboard/resumes" />} />
         </Route>
-    </Route>
-
-    {/* Public Routes */}
-    <Route path=":username">
-      <Route path=":slug" loader={publicLoader} element={<PublicResumePage />} />
     </Route>
   </Route>,
 );
