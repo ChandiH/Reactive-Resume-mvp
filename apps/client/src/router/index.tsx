@@ -65,24 +65,24 @@ export const routes = createRoutesFromElements(
     </Route>
 
     <Route path="dashboard">
-      <Route element={<AuthGuard />}>
+      {/* <Route element={<AuthGuard />}> */}
         <Route element={<DashboardLayout />}>
           <Route path="resumes" element={<ResumesPage />} />
           <Route path="settings" element={<SettingsPage />} />
 
           <Route index element={<Navigate replace to="/dashboard/resumes" />} />
         </Route>
-      </Route>
+      {/* </Route> */}
     </Route>
 
     <Route path="builder">
-      <Route element={<AuthGuard />}>
+      {/* <Route element={<AuthGuard />}> */}
         <Route element={<BuilderLayout />}>
           <Route path=":id" loader={builderLoader} element={<BuilderPage />} />
 
           <Route index element={<Navigate replace to="/dashboard/resumes" />} />
         </Route>
-      </Route>
+      {/* </Route> */}
     </Route>
 
     {/* Public Routes */}
