@@ -2,7 +2,6 @@ import { t } from "@lingui/macro";
 import { ScrollArea, Separator } from "@reactive-resume/ui";
 import { useRef } from "react";
 
-import { Copyright } from "@/client/components/copyright";
 import { ThemeSwitch } from "@/client/components/theme-switch";
 
 import { ExportSection } from "./sections/export";
@@ -49,7 +48,6 @@ export const RightSidebar = () => {
           <Separator />
           <InformationSection />
           <Separator />
-          <Copyright className="text-center" />
         </div>
       </ScrollArea>
 

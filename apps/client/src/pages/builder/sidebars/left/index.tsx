@@ -20,8 +20,6 @@ import { Fragment, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import { Icon } from "@/client/components/icon";
-import { UserAvatar } from "@/client/components/user-avatar";
-import { UserOptions } from "@/client/components/user-options";
 import { useResumeStore } from "@/client/stores/resume";
 
 import { BasicsSection } from "./sections/basics";
@@ -42,13 +40,7 @@ export const LeftSidebar = () => {
 
   return (
     <div className="flex bg-secondary-accent/30">
-      <div className="hidden basis-12 flex-col items-center justify-between bg-secondary-accent/30 py-4 sm:flex">
-        <Button asChild size="icon" variant="ghost" className="size-8 rounded-full">
-          <Link to="/dashboard">
-            <Icon size={14} />
-          </Link>
-        </Button>
-
+      <div className="hidden basis-12 flex-col items-center justify-center bg-secondary-accent/30 py-4 sm:flex">
         <div className="flex flex-col items-center justify-center gap-y-2">
           <SectionIcon
             id="basics"
@@ -152,12 +144,6 @@ export const LeftSidebar = () => {
             }}
           />
         </div>
-
-        <UserOptions>
-          <Button size="icon" variant="ghost" className="rounded-full">
-            <UserAvatar size={28} />
-          </Button>
-        </UserOptions>
       </div>
 
       <ScrollArea orientation="vertical" className="h-screen flex-1 pb-16 lg:pb-0">
