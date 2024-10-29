@@ -26,7 +26,7 @@ export const routes = createRoutesFromElements(
           <Route index element={<Navigate replace to="/dashboard/resumes" />} />
         </Route>
     </Route>
-  </Route>,
+  </Route>
 );
 
 export const router = createBrowserRouter(routes);
