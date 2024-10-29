@@ -5,11 +5,7 @@ import { cn } from "@reactive-resume/utils";
 import { motion } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useKeyboardShortcut from "use-keyboard-shortcut";
-
-import { Copyright } from "@/client/components/copyright";
 import { Icon } from "@/client/components/icon";
-import { UserAvatar } from "@/client/components/user-avatar";
-import { UserOptions } from "@/client/components/user-options";
 import { useUser } from "@/client/services/user";
 
 type Props = {
@@ -86,13 +82,7 @@ export const Sidebar = ({ setOpen }: SidebarProps) => {
       name: t`Resumes`,
       shortcut: "⇧R",
       icon: <ReadCvLogo />,
-    },
-    {
-      path: "/dashboard/settings",
-      name: t`Settings`,
-      shortcut: "⇧S",
-      icon: <FadersHorizontal />,
-    },
+    }
   ];
 
   return (
@@ -114,17 +104,6 @@ export const Sidebar = ({ setOpen }: SidebarProps) => {
       </div>
 
       <div className="flex-1" />
-
-      <Separator className="opacity-50" />
-
-      <UserOptions>
-        <Button size="lg" variant="ghost" className="w-full justify-start px-3">
-          <UserAvatar size={24} className="mr-3" />
-          <span>{user?.name}</span>
-        </Button>
-      </UserOptions>
-
-      <Copyright className="ml-2" />
     </div>
   );
 };
