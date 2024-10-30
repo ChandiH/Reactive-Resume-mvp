@@ -5,7 +5,6 @@ import { Outlet } from "react-router-dom";
 
 import { helmetContext } from "../constants/helmet";
 import { queryClient } from "../libs/query-client";
-import { AuthRefreshProvider } from "./auth-refresh";
 import { DialogProvider } from "./dialog";
 import { LocaleProvider } from "./locale";
 import { ThemeProvider } from "./theme";
@@ -15,7 +14,6 @@ export const Providers = () => (
   <LocaleProvider>
     <HelmetProvider context={helmetContext}>
       <QueryClientProvider client={queryClient}>
-        <AuthRefreshProvider>
           <ThemeProvider>
             <TooltipProvider>
               <DialogProvider>
@@ -25,7 +23,6 @@ export const Providers = () => (
               </DialogProvider>
             </TooltipProvider>
           </ThemeProvider>
-        </AuthRefreshProvider>
       </QueryClientProvider>
     </HelmetProvider>
   </LocaleProvider>

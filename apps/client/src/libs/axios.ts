@@ -4,8 +4,6 @@ import _axios from "axios";
 import createAuthRefreshInterceptor from "axios-auth-refresh";
 import { redirect } from "react-router-dom";
 
-import { refreshToken } from "@/client/services/auth";
-
 import { USER_KEY } from "../constants/query-keys";
 import { toast } from "../hooks/use-toast";
 import { translateError } from "../services/errors/translate-error";
@@ -39,9 +37,6 @@ axios.interceptors.response.use(
 // Reference: https://github.com/Flyrell/axios-auth-refresh/issues/191
 const axiosForRefresh = _axios.create({ baseURL: "/api", withCredentials: true });
 
-// Interceptor to handle expired access token errors
-const handleAuthError = () => refreshToken(axiosForRefresh);
-
 // Interceptor to handle expired refresh token errors
 const handleRefreshError = async () => {
   await queryClient.invalidateQueries({ queryKey: USER_KEY });
@@ -49,5 +44,4 @@ const handleRefreshError = async () => {
 };
 
 // Intercept responses to check for 401 and 403 errors, refresh token and retry the request
-createAuthRefreshInterceptor(axios, handleAuthError, { statusCodes: [401, 403] });
 createAuthRefreshInterceptor(axiosForRefresh, handleRefreshError);
