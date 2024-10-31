@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useKeyboardShortcut from "use-keyboard-shortcut";
 import { Icon } from "@/client/components/icon";
-import { useUser } from "@/client/services/user";
 
 type Props = {
   className?: string;
@@ -63,7 +62,6 @@ type SidebarProps = {
 };
 
 export const Sidebar = ({ setOpen }: SidebarProps) => {
-  const { user } = useUser();
   const navigate = useNavigate();
 
   useKeyboardShortcut(["shift", "r"], () => {

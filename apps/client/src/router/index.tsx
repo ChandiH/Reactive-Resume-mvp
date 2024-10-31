@@ -5,7 +5,6 @@ import { builderLoader, BuilderPage } from "../pages/builder/page";
 import { DashboardLayout } from "../pages/dashboard/layout";
 import { ResumesPage } from "../pages/dashboard/resumes/page";
 import { Providers } from "../providers";
-import { GuestGuard } from "./guards/guest";
 
 export const routes = createRoutesFromElements(
   <Route element={<Providers />}>
