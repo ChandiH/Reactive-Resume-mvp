@@ -2,15 +2,12 @@ import {
   DiamondsFour,
   DownloadSimple,
   IconProps,
-  Info,
   Layout,
   Note,
   Palette,
   ReadCvLogo,
-  ShareFat,
   TextT,
   Translate,
-  TrendUp,
 } from "@phosphor-icons/react";
 import { Button, ButtonProps, Tooltip } from "@reactive-resume/ui";
 
@@ -21,11 +18,8 @@ export type MetadataKey =
   | "theme"
   | "page"
   | "locale"
-  | "sharing"
-  | "statistics"
   | "export"
-  | "notes"
-  | "information";
+  | "notes";
 
 export const getSectionIcon = (id: MetadataKey, props: IconProps = {}) => {
   switch (id) {
@@ -51,17 +45,8 @@ export const getSectionIcon = (id: MetadataKey, props: IconProps = {}) => {
     case "locale": {
       return <Translate size={18} {...props} />;
     }
-    case "sharing": {
-      return <ShareFat size={18} {...props} />;
-    }
-    case "statistics": {
-      return <TrendUp size={18} {...props} />;
-    }
     case "export": {
       return <DownloadSimple size={18} {...props} />;
-    }
-    case "information": {
-      return <Info size={18} {...props} />;
     }
 
     default: {

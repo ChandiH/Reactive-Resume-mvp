@@ -9,7 +9,6 @@ import {
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ApiTags } from "@nestjs/swagger";
 
-import { TwoFactorGuard } from "@/server/auth/guards/two-factor.guard";
 import { User } from "@/server/user/decorators/user.decorator";
 
 import { StorageService } from "./storage.service";
@@ -20,7 +19,6 @@ export class StorageController {
   constructor(private readonly storageService: StorageService) {}
 
   @Put("image")
-  @UseGuards(TwoFactorGuard)
   @UseInterceptors(FileInterceptor("file"))
   async uploadFile(@User("id") userId: string, @UploadedFile("file") file: Express.Multer.File) {
     if (!file.mimetype.startsWith("image")) {

@@ -26,8 +26,7 @@ import { zodToJsonSchema } from "zod-to-json-schema";
 
 import { User } from "@/server/user/decorators/user.decorator";
 
-import { OptionalGuard } from "../auth/guards/optional.guard";
-import { TwoFactorGuard } from "../auth/guards/two-factor.guard";
+// import { OptionalGuard } from "../auth/guards/optional.guard";
 import { Resume } from "./decorators/resume.decorator";
 import { ResumeGuard } from "./guards/resume.guard";
 import { ResumeService } from "./resume.service";
@@ -94,7 +93,7 @@ export class ResumeController {
   }
 
   @Get("/public/:username/:slug")
-  @UseGuards(OptionalGuard)
+  // @UseGuards(OptionalGuard)
   findOneByUsernameSlug(
     @Param("username") username: string,
     @Param("slug") slug: string,
@@ -126,7 +125,7 @@ export class ResumeController {
   }
 
   @Get("/print/:id")
-  @UseGuards(OptionalGuard, ResumeGuard)
+  @UseGuards(ResumeGuard)
   async printResume(@User("id") userId: string | undefined, @Resume() resume: ResumeDto) {
     try {
       const url = await this.resumeService.printResume(resume, USER_ID);
