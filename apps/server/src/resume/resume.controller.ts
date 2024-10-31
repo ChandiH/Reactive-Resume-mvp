@@ -24,8 +24,6 @@ import { resumeDataSchema } from "@reactive-resume/schema";
 import { ErrorMessage } from "@reactive-resume/utils";
 import { zodToJsonSchema } from "zod-to-json-schema";
 
-import { User } from "@/server/user/decorators/user.decorator";
-
 // import { OptionalGuard } from "../auth/guards/optional.guard";
 import { Resume } from "./decorators/resume.decorator";
 import { ResumeGuard } from "./guards/resume.guard";
@@ -45,7 +43,7 @@ export class ResumeController {
 
   @Post()
   // @UseGuards(TwoFactorGuard)
-  async create(@User() user: UserEntity, @Body() createResumeDto: CreateResumeDto) {
+  async create(@Body() createResumeDto: CreateResumeDto) {
     try {
       return await this.resumeService.create(USER_ID, createResumeDto);
     } catch (error) {
@@ -60,10 +58,10 @@ export class ResumeController {
 
   @Post("import")
   // @UseGuards(TwoFactorGuard)
-  async import(@User() user: UserEntity, @Body() importResumeDto: unknown) {
+  async import(@Body() importResumeDto: unknown) {
     try {
       const result = importResumeSchema.parse(importResumeDto);
-      return await this.resumeService.import(user.id, result);
+      return await this.resumeService.import(result);
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError && error.code === "P2002") {
         throw new BadRequestException(ErrorMessage.ResumeSlugAlreadyExists);
@@ -76,8 +74,8 @@ export class ResumeController {
 
   @Get()
   // @UseGuards(TwoFactorGuard)
-  findAll(@User() user: UserEntity) {
-    return this.resumeService.findAll(USER_ID);
+  findAll() {
+    return this.resumeService.findAll();
   }
 
   @Get(":id")
@@ -92,43 +90,32 @@ export class ResumeController {
     return this.resumeService.findOneStatistics(id);
   }
 
-  @Get("/public/:username/:slug")
-  // @UseGuards(OptionalGuard)
-  findOneByUsernameSlug(
-    @Param("username") username: string,
-    @Param("slug") slug: string,
-    @User("id") userId: string,
-  ) {
-    return this.resumeService.findOneByUsernameSlug(username, slug, userId);
-  }
-
   @Patch(":id")
   // @UseGuards(TwoFactorGuard)
   update(
-    @User() user: UserEntity,
     @Param("id") id: string,
     @Body() updateResumeDto: UpdateResumeDto,
   ) {
-    return this.resumeService.update(USER_ID, id, updateResumeDto);
+    return this.resumeService.update(id, updateResumeDto);
   }
 
   @Patch(":id/lock")
   // @UseGuards(TwoFactorGuard)
-  lock(@User() user: UserEntity, @Param("id") id: string, @Body("set") set = true) {
-    return this.resumeService.lock(USER_ID, id, set);
+  lock(@Param("id") id: string, @Body("set") set = true) {
+    return this.resumeService.lock(id, set);
   }
 
   @Delete(":id")
   // @UseGuards(TwoFactorGuard)
-  remove(@User() user: UserEntity, @Param("id") id: string) {
-    return this.resumeService.remove(USER_ID, id);
+  remove(@Param("id") id: string) {
+    return this.resumeService.remove(id);
   }
 
   @Get("/print/:id")
   @UseGuards(ResumeGuard)
-  async printResume(@User("id") userId: string | undefined, @Resume() resume: ResumeDto) {
+  async printResume(@Resume() resume: ResumeDto) {
     try {
-      const url = await this.resumeService.printResume(resume, USER_ID);
+      const url = await this.resumeService.printResume(resume, );
 
       return { url };
     } catch (error) {

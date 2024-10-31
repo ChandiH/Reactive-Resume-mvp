@@ -192,7 +192,6 @@ export class PrinterService {
 
       // This step will also save the resume URL in cache
       const resumeUrl = await this.storageService.uploadObject(
-        resume.userId,
         "resumes",
         buffer,
         resume.title,
@@ -252,7 +251,6 @@ export class PrinterService {
 
     // Generate a hash digest of the resume data, this hash will be used to check if the resume has been updated
     const previewUrl = await this.storageService.uploadObject(
-      resume.userId,
       "previews",
       buffer,
       resume.id,

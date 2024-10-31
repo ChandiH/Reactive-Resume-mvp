@@ -109,14 +109,13 @@ export class StorageService implements OnModuleInit {
   }
 
   async uploadObject(
-    userId: string,
     type: UploadType,
     buffer: Buffer,
     filename: string = createId(),
   ) {
     const extension = type === "resumes" ? "pdf" : "jpg";
     const storageUrl = this.configService.getOrThrow<string>("STORAGE_URL");
-    const filepath = `${userId}/${type}/${filename}.${extension}`;
+    const filepath = `${type}/${filename}.${extension}`;
     const url = `${storageUrl}/${filepath}`;
     const metadata =
       extension === "jpg"
@@ -143,9 +142,9 @@ export class StorageService implements OnModuleInit {
     }
   }
 
-  async deleteObject(userId: string, type: UploadType, filename: string) {
+  async deleteObject(type: UploadType, filename: string) {
     const extension = type === "resumes" ? "pdf" : "jpg";
-    const path = `${userId}/${type}/${filename}.${extension}`;
+    const path = `${type}/${filename}.${extension}`;
 
     try {
       await this.client.removeObject(this.bucketName, path);
